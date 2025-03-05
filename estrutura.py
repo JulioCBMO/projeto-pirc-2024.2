@@ -48,3 +48,50 @@ class ListaEncadeada:
     
     def __len__(self):
         return self.tamanho
+class No:
+    def __init__(self, dado):
+        self.dado = dado
+        self.proximo = None
+
+class FilaEncadeada:
+    def __init__(self):
+        self.inicio = None
+        self.fim = None
+        self.tamanho = 0
+    
+    def enfileirar(self, dado):
+        novo_no = No(dado)
+        
+        if not self.inicio:
+            self.inicio = novo_no
+            self.fim = novo_no
+        else:
+            self.fim.proximo = novo_no
+            self.fim = novo_no
+        
+        self.tamanho += 1
+    
+    def desenfileirar(self):
+        if not self.inicio:
+            raise IndexError("Fila está vazia")
+        
+        dado = self.inicio.dado
+        self.inicio = self.inicio.proximo
+        
+        if not self.inicio:
+            self.fim = None
+        
+        self.tamanho -= 1
+        return dado
+    
+    def __len__(self):
+        return self.tamanho
+    
+    def esta_vazia(self):
+        return self.tamanho == 0
+    
+    def __iter__(self):
+        atual = self.inicio
+        while atual:
+            yield atual.dado
+            atual = atual.proximo
