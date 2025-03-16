@@ -4,9 +4,9 @@ Esse Sistema de Gerenciamento de Tarefas é uma aplicação cliente/servidor imp
 Autor:
 Júlio César Batista de Medeiros Oliveira (20232370027)
 
-Disciplinas
-Estruturas de Dados,  
-Protocolos de Interconexão de Redes de Computadores (Prof. Leonidas Lima)
+Disciplinas:
+
+Estruturas de Dados, Protocolos de Interconexão de Redes de Computadores (Prof. Leonidas Lima)
 
 ## Descrição do Projeto
 
