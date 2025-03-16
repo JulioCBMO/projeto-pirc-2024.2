@@ -1,5 +1,5 @@
 # projeto-pirc-2024.2
-Sistema de Gerenciamento de Tarefas Colaborativo
+Sistema de Gerenciamento de Tarefas
 
 Autor:
 Júlio César Batista de Medeiros Oliveira (20232370027)
@@ -74,7 +74,8 @@ Protocolo da Aplicação
 - Em caso de erro de formatação, o servidor responderá com mensagem `NACK` informando o erro.
 - Toda mensagem enviada deverá obedecer a este padrão para garantir a consistência e facilitar a comunicação entre os módulos.
 
-Execução:
+## Execução:
+
 Iniciar servidor: python servidor/servidor.py
 
-Iniciar cliente: python cliente/cliente.py
+Iniciar cliente: python cliente/cliente_gui.py
