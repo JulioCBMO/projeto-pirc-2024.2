@@ -32,6 +32,7 @@ Formato dos Dados: JSON (para payloads estruturados, como dados de registro, log
 ## Protocolo da Aplicação
 
 Todas as mensagens trocadas entre o cliente e o servidor seguem o formato: TIPO|TAMANHO|PAYLOAD
+
 TIPO: Identifica o comando, por exemplo: REGISTER, LOGIN, TASK, LIST, REMOVE_TASK, COMMENT.
 
 TAMANHO: Número de caracteres do campo PAYLOAD.
@@ -60,6 +61,7 @@ Comentário em Tarefa: Adiciona comentários a uma determinada tarefa, associado
 ## Instruções para Execução
 
 Servidor
+
 Abra o terminal e navegue até o diretório do projeto.
 
 Inicie o servidor: 
@@ -68,6 +70,7 @@ python server.py
 O servidor ficará aguardando conexões na porta 12345.
 
 Cliente
+
 Em outra janela de terminal, navegue até o diretório do projeto.
 
 Inicie o cliente:
