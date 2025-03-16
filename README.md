@@ -74,8 +74,7 @@ Protocolo da Aplicação
 - Em caso de erro de formatação, o servidor responderá com mensagem `NACK` informando o erro.
 - Toda mensagem enviada deverá obedecer a este padrão para garantir a consistência e facilitar a comunicação entre os módulos.
 
-*FIM DO PROTOCOLO*
-
 Execução:
 Iniciar servidor: python servidor/servidor.py
-Iniciar cliente: python -m cliente.cliente_socket
+
+Iniciar cliente: python cliente/cliente.py
