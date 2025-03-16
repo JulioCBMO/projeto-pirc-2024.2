@@ -64,6 +64,7 @@ Abra o terminal e navegue até o diretório do projeto.
 
 Inicie o servidor: 
 python server.py
+
 O servidor ficará aguardando conexões na porta 12345.
 
 Cliente
@@ -71,6 +72,7 @@ Em outra janela de terminal, navegue até o diretório do projeto.
 
 Inicie o cliente:
 python client.py
+
 Siga as instruções exibidas, utilizando as opções do menu.
 
 ## Observações Finais
