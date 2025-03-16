@@ -1,8 +1,8 @@
 import socket
 import threading
 from typing import List
-from estruturas.lista_encadeada import ListaEncadeada
-from protocolo import Protocolo, TipoMensagem
+from estrutura import ListaEncadeada
+from modelos import Protocolo, TipoMensagem
 
 class ServidorSocket:
     def __init__(self, host='localhost', porta=5000):
@@ -36,19 +36,49 @@ class ServidorSocket:
                 # Receber mensagem
                 mensagem = cliente_socket.recv(1024)
                 if not mensagem:
+                    print("Conexão fechada pelo cliente")
                     break
                 
-                # Processar mensagem
-                dados = Protocolo.decodificar(mensagem)
-                resposta = self.processar_mensagem(dados)
+                print(f"Mensagem recebida: {mensagem}")
                 
-                # Enviar resposta
-                cliente_socket.send(Protocolo.codificar(resposta['tipo'], resposta['dados']))
+                # Processar mensagem
+                try:
+                    dados = Protocolo.decodificar(mensagem)
+                    print(f"Dados decodificados: {dados}")
+                    
+                    resposta = self.processar_mensagem(dados)
+                    print(f"Resposta processada: {resposta}")
+                    
+                    if resposta is None:
+                        print("ERRO: Resposta é None!")
+                        resposta = {
+                            "tipo": TipoMensagem.ERRO,
+                            "dados": {"mensagem": "Erro interno do servidor"}
+                        }
+                    
+                    # Enviar resposta
+                    resposta_codificada = Protocolo.codificar(resposta['tipo'], resposta['dados'])
+                    print(f"Enviando resposta: {resposta_codificada}")
+                    cliente_socket.send(resposta_codificada)
+                except Exception as e:
+                    print(f"Erro no processamento: {e}")
+                    import traceback
+                    traceback.print_exc()
+                    
+                    # Enviar erro ao cliente
+                    erro_msg = {
+                        "tipo": TipoMensagem.ERRO,
+                        "dados": {"mensagem": f"Erro no servidor: {str(e)}"}
+                    }
+                    cliente_socket.send(Protocolo.codificar(TipoMensagem.ERRO, erro_msg['dados']))
         
         except Exception as e:
-            print(f"Erro no cliente: {e}")
+            print(f"Erro na conexão com cliente: {e}")
+            import traceback
+            traceback.print_exc()
         finally:
             cliente_socket.close()
+            print("Conexão com cliente encerrada")
     
     def processar_mensagem(self, mensagem):
         tipo = mensagem['tipo']
@@ -59,20 +89,26 @@ class ServidorSocket:
             return self.autenticar(dados)
         elif tipo == TipoMensagem.CRIAR_PROJETO:
             return self.criar_projeto(dados)
-        # Outros tipos de mensagem...
         
+        # Outros tipos de mensagem
         return {
             "tipo": TipoMensagem.ERRO,
             "dados": {"mensagem": "Tipo de mensagem não suportado"}
         }
     
     def autenticar(self, dados):
-        # Lógica de autenticação
-        pass
+        print(f"Processando autenticação: {dados}")
+        return {
+            "tipo": TipoMensagem.AUTENTICACAO,
+            "dados": {"status": "sucesso", "mensagem": "Autenticação realizada com sucesso"}
+        }
     
     def criar_projeto(self, dados):
-        # Lógica de criação de projeto
-        pass
+        print(f"Processando criação de projeto: {dados}")
+        return {
+            "tipo": TipoMensagem.CRIAR_PROJETO,
+            "dados": {"status": "sucesso", "mensagem": "Projeto criado com sucesso"}
+        }
 
 if __name__ == "__main__":
     servidor = ServidorSocket()

@@ -29,16 +29,24 @@ class Protocolo:
     
     @staticmethod
     def decodificar(mensagem: bytes) -> dict:
-        """
-        Decodifica mensagem recebida por socket
-        """
         try:
-            mensagem_dict = json.loads(mensagem.decode('utf-8'))
+            if not mensagem:
+                print("Mensagem vazia recebida")
+                return {
+                    "tipo": TipoMensagem.ERRO,
+                    "dados": {"erro": "Mensagem vazia"}
+                }
+            
+            mensagem_str = mensagem.decode('utf-8')
+            print(f"Mensagem decodificada: {mensagem_str}")
+        
+            mensagem_dict = json.loads(mensagem_str)
             return {
                 "tipo": TipoMensagem[mensagem_dict['tipo']],
                 "dados": mensagem_dict['dados']
             }
-        except (json.JSONDecodeError, KeyError) as e:
+        except (json.JSONDecodeError, KeyError, UnicodeDecodeError) as e:
+            print(f"Erro ao decodificar mensagem: {e}, mensagem: {mensagem}")
             return {
                 "tipo": TipoMensagem.ERRO,
                 "dados": {"erro": str(e)}

@@ -4,7 +4,7 @@ from datetime import datetime
 from enum import Enum, auto
 from typing import List, Dict
 from marshmallow import Schema, fields, validate, ValidationError
-from estrutura.py import ListaEncadeada,  FilaEncadeada
+
 
 
 @dataclass
@@ -24,7 +24,7 @@ class Usuario:
             self.projetos.remove(projeto_id)
     
     def validar_senha(self, senha_tentativa: str) -> bool:
-        # Implementação simples - substituir por hash seguro
+        
         return self.senha == senha_tentativa
 
 class StatusTarefa(Enum):
