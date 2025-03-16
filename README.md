@@ -23,8 +23,6 @@ Linguagem: Python 3.x
 
 Comunicação: Sockets (TCP)
 
-Concorrência: Threads (um thread por conexão)
-
 Estruturas de Dados Personalizadas: Lista encadeada para gerenciamento de tarefas
 
 Formato das Mensagens: Protocolo customizado utilizando o padrão "TIPO|TAMANHO|PAYLOAD"
